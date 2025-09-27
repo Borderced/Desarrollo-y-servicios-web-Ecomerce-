@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Ecommerce Material Design 3</title>
+    
+    <!-- Material Design 3 Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    
+    <!-- Google Fonts - Roboto (MD3 Typography) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- App Bar Superior -->
+    <header class="app-bar">
+        <div class="app-bar-content">
+            <button class="icon-button menu-btn" id="menuBtn">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <h1 class="app-bar-title">TechStore</h1>
+            <div class="app-bar-actions">
+                <button class="icon-button search-btn" id="searchBtn">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+                <button class="icon-button cart-btn" id="cartBtn">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <span class="badge" id="cartBadge">0</span>
+                </button>
+                <button class="icon-button profile-btn">
+                    <span class="material-symbols-outlined">account_circle</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Barra de búsqueda expandible -->
+        <div class="search-bar" id="searchBar">
+            <div class="search-field">
+                <span class="material-symbols-outlined">search</span>
+                <input type="text" placeholder="Buscar productos..." id="searchInput">
+                <button class="icon-button close-search" id="closeSearch">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegación lateral -->
+    <nav class="navigation-drawer" id="navigationDrawer">
+        <div class="drawer-header">
+            <h2>Categorías</h2>
+            <button class="icon-button close-drawer" id="closeDrawer">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="drawer-content">
+            <div class="navigation-item active" data-category="all">
+                <span class="material-symbols-outlined">home</span>
+                <span>Todos los productos</span>
+            </div>
+            <div class="navigation-item" data-category="smartphones">
+                <span class="material-symbols-outlined">smartphone</span>
+                <span>Smartphones</span>
+            </div>
+            <div class="navigation-item" data-category="laptops">
+                <span class="material-symbols-outlined">laptop</span>
+                <span>Laptops</span>
+            </div>
+            <div class="navigation-item" data-category="tablets">
+                <span class="material-symbols-outlined">tablet</span>
+                <span>Tablets</span>
+            </div>
+            <div class="navigation-item" data-category="auriculares">
+                <span class="material-symbols-outlined">headphones</span>
+                <span>Auriculares</span>
+            </div>
+            <div class="navigation-item" data-category="electronica">
+                <span class="material-symbols-outlined">tv</span>
+                <span>Electrónica</span>
+            </div>
+            <div class="navigation-item" data-category="ropa">
+                <span class="material-symbols-outlined">checkroom</span>
+                <span>Ropa</span>
+            </div>
+            <div class="navigation-item" data-category="accesorios">
+                <span class="material-symbols-outlined">cable</span>
+                <span>Accesorios</span>
+            </div>
+            <hr style="margin: 16px 24px; border: none; border-top: 1px solid var(--md-sys-color-outline-variant);">
+            <div class="navigation-item" id="aboutBtn">
+                <span class="material-symbols-outlined">info</span>
+                <span>Acerca de</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overlay para el drawer -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content-centered">
+                <h1 class="hero-title">Descubre la mejor tecnología</h1>
+                <p class="hero-subtitle">Encuentra los productos más innovadores con los mejores precios</p>
+                <button class="filled-button hero-cta">
+                    <span>Explorar productos</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Filtros -->
+        <section class="filters-section">
+            <div class="filters-container">
+                <h2 class="section-title">Filtrar por</h2>
+                <div class="filter-chips">
+                    <div class="filter-chip active" data-filter="all">
+                        <span>Todos</span>
+                    </div>
+                    <div class="filter-chip" data-filter="precio-bajo">
+                        <span>Precio bajo</span>
+                    </div>
+                    <div class="filter-chip" data-filter="precio-alto">
+                        <span>Precio alto</span>
+                    </div>
+                    <div class="filter-chip" data-filter="populares">
+                        <span>Más populares</span>
+                    </div>
+                    <div class="filter-chip" data-filter="nuevos">
+                        <span>Nuevos</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Productos destacados -->
+        <section class="products-section">
+            <h2 class="section-title">Productos destacados</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- Los productos se cargarán dinámicamente -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal del carrito -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Carrito de compras</h3>
+                <button class="icon-button close-modal" id="closeCartModal">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="modal-body" id="cartItems">
+                <!-- Items del carrito se cargarán aquí -->
+            </div>
+            <div class="modal-footer">
+                <div class="cart-total">
+                    <strong>Total: $<span id="cartTotal">0</span></strong>
+                </div>
+                <div class="cart-actions">
+                    <button class="outlined-button" id="clearCart">Vaciar carrito</button>
+                    <button class="filled-button" id="checkout">Finalizar compra</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal "Acerca de" -->
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Acerca de</h3>
+                <button class="icon-button close-modal" id="closeAboutModal">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center; padding: 40px 24px;">
+                <div style="margin-bottom: 32px;">
+                    <span class="material-symbols-outlined" style="font-size: 64px; color: var(--md-sys-color-primary); margin-bottom: 16px; display: block;">code</span>
+                    <h2 style="color: var(--md-sys-color-on-surface); margin-bottom: 8px;">TechStore</h2>
+                    <p style="color: var(--md-sys-color-on-surface-variant); margin-bottom: 24px;">Ecommerce con Material Design 3</p>
+                </div>
+                
+                <div style="background-color: var(--md-sys-color-surface-container); padding: 24px; border-radius: 12px; margin-bottom: 24px;">
+                    <h3 style="color: var(--md-sys-color-on-surface); margin-bottom: 16px;">Página hecha por:</h3>
+                    
+                    <div style="margin-bottom: 16px;">
+                        <p style="font-weight: 500; color: var(--md-sys-color-primary); font-size: 18px; margin-bottom: 4px;">Enrique Alejandro Zuñiga Gutierrez</p>
+                        <p style="color: var(--md-sys-color-on-surface-variant); margin-bottom: 8px;">22680322</p>
+                    </div>
+                    
+                    <div style="border-top: 1px solid var(--md-sys-color-outline-variant); padding-top: 16px;">
+                        <p style="color: var(--md-sys-color-on-surface); font-weight: 500; margin-bottom: 4px;">Desarrollo y servicios web</p>
+                        <p style="color: var(--md-sys-color-on-surface-variant);">ARISTIDES CABALLERO ALFARO</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+                    <div style="background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 500;">HTML5</div>
+                    <div style="background-color: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 500;">CSS3</div>
+                    <div style="background-color: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-on-tertiary-container); padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 500;">JavaScript</div>
+                    <div style="background-color: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 500;">Material Design 3</div>
+                </div>
+            </div>
+            <div class="modal-footer" style="text-align: center;">
+                <button class="text-button" id="closeAboutModalFooter">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal overlay -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <!-- Snackbar para notificaciones -->
+    <div class="snackbar" id="snackbar">
+        <span class="snackbar-text" id="snackbarText"></span>
+        <button class="text-button" id="snackbarAction">Cerrar</button>
+    </div>
+
+    <!-- FAB para volver arriba -->
+    <button class="fab" id="scrollToTop">
+        <span class="material-symbols-outlined">keyboard_arrow_up</span>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
